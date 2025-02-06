@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <title>Viral Video Automation</title>
+</head>
+<body>
+    <img src="/public/backgroundImage.png" class="-z-10 absolute h-screen w-full">
+    <a href="/"><img src="/public/logo.png" class="absolute mx-auto w-56 self-center flex"></a>
+    <div class="flex flex-row justify-evenly h-screen items-center">
+        <div class="flex flex-col border-slate-800 border-2 p-24 rounded-xl blur-0 bg-transparent backdrop-blur-md">
+            <h1 class="flex flex-row justify-center text-3xl my-5 font-semibold uppercase items-center text-[#222222] font-[orbitron]">TrendForge</h1>
+            <div class="flex flex-row">
+                <button onclick=generateVideo() id="videoTrigger" class="my-5 border-red-600 border-2 self-center cursor-not-allowed w-40 py-5 mx-3 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
+                " disabled>Generate Video</button>
+                <button onclick=generateImage() id="imageTrigger" class="my-5 border-2 self-center w-40 py-5 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
+                ">Generate Image</button>
+            </div>
+            <!-- THIS IS FOR THE FORM FOR VIDEO GENERATION -->
+            <form class="flex flex-row justify-center" id="subjectForm">
+                <div class="flex flex-col justify-center">
+                    <label class="text-slate-600 text-xs mb-2 text-center">subject</label>
+                    <textarea placeholder="Facts about the Philippines" id="subject" name="subject" class="w-96 h-32 resize self-center border-black border-2 text-slate-950 rounded-lg px-2 py-3" required></textarea>
+                    <p class="mt-5 font-bold text-green-600 hidden" id="readyText">Your Video is ready to play and download please see the right section</p>
+                    <button class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600
+                    " type="submit" id="generatebutton">Generate Video</button>
+                </div>
+            </form>
+            <!-- THIS IS THE FORM FOR THE IMAGE GENERATION -->
+            <form class="flex-row justify-center hidden" id="subjectImageForm">
+                <div class="flex flex-col justify-center">
+                    <label class="text-slate-600 text-xs mb-2 text-center">subject</label>
+                    <textarea placeholder="Facts about the Philippines" id="subjectImage" name="subject" class="w-96 h-32 resize self-center border-black border-2 text-slate-950 rounded-lg px-2 py-3" required></textarea>
+                    <p class="mt-5 font-bold text-green-600 hidden" id="readyImageText">Your Video is ready to play and download please see the right section</p>
+                    <button class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600
+                    " type="submit" id="generateImagebutton">Generate Image</button>
+                </div>
+            </form>
+            <a href="javascript:location.reload()" id="restartbutton" class="w-64 self-center hidden"><button class="my-5 border-2 self-center w-64 py-5 rounded-lg bg-slate-700 text-white text-lg font-bold  hover:bg-slate-600
+                ">Generate Another Content</button></a>
+        </div>
+        <div class="justify-center items-center border-2 p-5 border-black rounded-lg">
+            <div class="" id="streamVideoContainer">
+                <div class="flex-row items-center justify-between flex">
+                <h1 class="text-3xl font-semibold font-serif py-4 text-center">Stream Video</h1>
+                <button onclick=exitVideo() id="close-button" class="text-2xl font-serif font-semibold hidden">X</button>
+                </div>
+                <video class="py-4 hidden" width="338px" height="600px" controls id="video"></video>
+                <div class="items-center w-full justify-center flex flex-row">
+                    <button id="playButton" onclick=loadVideo() class="border-2 p-4 hover:bg-slate-200 mr-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>Play Video</button>
+                    <button id="downloadButton" onclick=downloadVideo() class="border-2 p-4 hover:bg-slate-200 ml-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>Download Video</button>
+                </div>
+            </div>
+            <div class="hidden"  id="streamImageContainer">
+                <div class="flex flex-row items-center justify-between">
+                    <h1 class="text-3xl font-semibold font-serif py-4 text-center">View Image</h1>
+                    <button onclick=exitImage() id="close-button" class="text-2xl font-serif font-semibold hidden">X</button>
+                    </div>
+                    <div class="hidden justify-center items-center" id="imagePreviewContainer">
+                    <img src="" id="imagePreview" height="600px" width="338px" class=" rounded-lg text-center justify-center">
+                    </div>
+                    <div class="items-center w-full justify-center flex flex-row">
+                        <button id="viewButton" onclick=viewImage() class="border-2 p-4 hover:bg-slate-200 mr-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>View Image</button>
+                        <button id="downloadImageButton" onclick=downloadImage() class="border-2 p-4 hover:bg-slate-200 ml-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>Download Image</button>
+                    </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
