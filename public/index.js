@@ -181,7 +181,7 @@ function viewImage(){
 
 //THIS IS FOR DOWNLOADING IMAGE
 async function downloadImage(){
-    const response = await fetch("http://87.106.135.198:5151/downloadImage", {
+    const response = await fetch("http://87.106.135.198:5151/test", {
         method: "POST"
     })
 
