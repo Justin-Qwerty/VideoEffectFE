@@ -15,7 +15,7 @@
     <div class="flex flex-row justify-evenly h-screen items-center">
         <div class="flex flex-col border-slate-800 border-2 p-24 rounded-xl blur-0 bg-transparent backdrop-blur-md">
             <h1 class="flex flex-row justify-center text-3xl my-5 font-semibold uppercase items-center text-[#222222] font-[orbitron]">TrendForge</h1>
-            <div class="flex flex-row">
+            <div class="flex flex-row items-center justify-center">
                 <button onclick=generateVideo() id="videoTrigger" class="my-5 border-red-600 border-2 self-center cursor-not-allowed w-40 py-5 mx-3 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
                 " disabled>Generate Video</button>
                 <button onclick=generateImage() id="imageTrigger" class="my-5 border-2 self-center w-40 py-5 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
@@ -36,7 +36,7 @@
                 <div class="flex flex-col justify-center">
                     <label class="text-slate-600 text-xs mb-2 text-center">subject</label>
                     <textarea placeholder="Facts about the Philippines" id="subjectImage" name="subject" class="w-96 h-32 resize self-center border-black border-2 text-slate-950 rounded-lg px-2 py-3" required></textarea>
-                    <p class="mt-5 font-bold text-green-600 hidden" id="readyImageText">Your Video is ready to play and download please see the right section</p>
+                    <p class="mt-5 font-bold text-green-600 hidden" id="readyImageText">Your Image is ready to view and download please see the right section</p>
                     <button class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600
                     " type="submit" id="generateImagebutton">Generate Image</button>
                 </div>

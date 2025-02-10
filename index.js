@@ -8,6 +8,7 @@ const textareaImage = document.getElementById("subjectImage")
 const playbutton = document.getElementById("playButton")
 const downloadbutton = document.getElementById("downloadButton")
 const readyText = document.getElementById("readyText")
+const readyImageText = document.getElementById("readyImageText")
 const generateImageButton = document.getElementById("generateImagebutton")
 const videoTrigger = document.getElementById("videoTrigger")
 const imageTrigger = document.getElementById("imageTrigger")
@@ -22,7 +23,7 @@ const streamVideoContainer = document.getElementById("streamVideoContainer")
 let title = "";
 
 
-// THIS IS FOR THE GENERATE BUTTON
+// THIS IS FOR THE GENERATE VIDEO BUTTON
 document.getElementById("subjectForm").addEventListener("submit", async (event) => {
     event.preventDefault();
     formdata = new FormData(event.target);
@@ -42,7 +43,7 @@ document.getElementById("subjectForm").addEventListener("submit", async (event) 
     imageTrigger.classList.add("cursor-not-allowed")
 
     try{
-        const response = await fetch("http://127.0.0.1:5000/generateVideo", {
+        const response = await fetch("http://87.106.135.198:5151/generateVideo", {
             method: "POST",
             body: formdata
         })
@@ -93,12 +94,14 @@ document.getElementById("subjectImageForm").addEventListener("submit", async (ev
     imageTrigger.classList.add("cursor-not-allowed")
 
     try{
-        const response = await fetch("http://127.0.0.1:5000/test", {
+        const response = await fetch("http://87.106.135.198:5151/generateImage", {
+            // 87.106.135.198:5151
             method: "POST",
             body: formdata
         })
 
         if(response.ok){
+            console.log(response)
             console.log("data sent");
             generatebuttonTrigger.style.display = "none"
             restartbutton.style.display = "block"
@@ -106,7 +109,7 @@ document.getElementById("subjectImageForm").addEventListener("submit", async (ev
             viewButton.classList.remove("cursor-not-allowed")
             downloadImageButton.disabled = false
             downloadImageButton.classList.remove("cursor-not-allowed")
-
+            readyImageText.classList.remove("hidden")
 
            
            
@@ -126,7 +129,7 @@ document.getElementById("subjectImageForm").addEventListener("submit", async (ev
 // THIS IS FOR STREAMING VIDEO
 function loadVideo(){
 
-    videovar.src= "http://127.0.0.1:5000/video";
+    videovar.src= "http://87.106.135.198:5151/video";
     videovar.load();
     videovar.play();
     videovar.style.display= "block";
@@ -136,7 +139,7 @@ function loadVideo(){
 
 // THIS IS FOR DOWNLOADING VIDEO
 async function downloadVideo(){
-    const response = await fetch("http://127.0.0.1:5000/downloadVideo", {
+    const response = await fetch("http://87.106.135.198:5151/downloadVideo", {
         method: "POST"
     })
 
@@ -165,7 +168,7 @@ function exitVideo(){
 
 // THIS IS FOR VIEWING IMAGE
 function viewImage(){
-    fetch(`http://127.0.0.1:5000/streamImage`)
+    fetch(`http://87.106.135.198:5151/streamImage`)
     .then(response => response.blob())
     .then(imageBlob => {
         const imgUrl = URL.createObjectURL(imageBlob);
@@ -178,7 +181,7 @@ function viewImage(){
 
 //THIS IS FOR DOWNLOADING IMAGE
 async function downloadImage(){
-    const response = await fetch("http://127.0.0.1:5000/downloadImage", {
+    const response = await fetch("http://87.106.135.198:5151/downloadImage", {
         method: "POST"
     })
 
@@ -190,7 +193,7 @@ async function downloadImage(){
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href=url
-    a.download = `test.png`;
+    a.download = `${title}.png`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -216,6 +219,7 @@ function generateVideo(){
     imageTrigger.classList.remove("border-red-600")
     streamImageContainer.classList.add("hidden")
     streamVideoContainer.classList.remove("hidden")
+    
     
 }
 
