@@ -20,116 +20,118 @@ const downloadImageButton = document.getElementById("downloadImageButton")
 const imagePreviewContainer = document.getElementById("imagePreviewContainer")
 const streamImageContainer = document.getElementById("streamImageContainer")
 const streamVideoContainer = document.getElementById("streamVideoContainer")
+const uploadButton = document.getElementById("uploadButton")
+const pleaseWait = document.getElementById("pleaseWait")
 let title = "";
 
 
 // THIS IS FOR THE GENERATE VIDEO BUTTON
-document.getElementById("subjectForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    formdata = new FormData(event.target);
-    console.log(formdata.entries());
-    for (let [key, value] of formdata.entries()) {
+// document.getElementById("subjectForm").addEventListener("submit", async (event) => {
+//     event.preventDefault();
+//     formdata = new FormData(event.target);
+//     console.log(formdata.entries());
+//     for (let [key, value] of formdata.entries()) {
         
-        console.log(`${key}: ${value}`);
-        title = value;
-    }
-    textarea.disabled = true
-    generatebutton.disabled = true
-    generatebutton.textContent = "Generating Video please wait..."
-    generatebutton.classList.add("opacity-50", "cursor-not-allowed")
-    videoTrigger.disabled = true
-    videoTrigger.classList.add("cursor-not-allowed")
-    imageTrigger.disabled = true
-    imageTrigger.classList.add("cursor-not-allowed")
+//         console.log(`${key}: ${value}`);
+//         title = value;
+//     }
+//     textarea.disabled = true
+//     generatebutton.disabled = true
+//     generatebutton.textContent = "Generating Video please wait..."
+//     generatebutton.classList.add("opacity-50", "cursor-not-allowed")
+//     videoTrigger.disabled = true
+//     videoTrigger.classList.add("cursor-not-allowed")
+//     imageTrigger.disabled = true
+//     imageTrigger.classList.add("cursor-not-allowed")
 
-    try{
-        const response = await fetch("http://87.106.135.198:5151/generateVideo", {
-            method: "POST",
-            body: formdata
-        })
+//     try{
+//         const response = await fetch("http://127.0.0.1:5000/test", {
+//             method: "POST",
+//             body: formdata
+//         })
 
-        if(response.ok){
-            console.log("data sent");
-            generatebutton.style.display = "none"
-            restartbutton.style.display = "block"
-            playbutton.disabled = false;
-            downloadbutton.disabled = false;
-            playbutton.classList.remove("cursor-not-allowed")
-            downloadbutton.classList.remove("cursor-not-allowed")
-            readyText.classList.remove("hidden")
-        }else{
-            throw new Error("failed to send")
+//         if(response.ok){
+//             console.log("data sent");
+//             generatebutton.style.display = "none"
+//             restartbutton.style.display = "block"
+//             playbutton.disabled = false;
+//             downloadbutton.disabled = false;
+//             playbutton.classList.remove("cursor-not-allowed")
+//             downloadbutton.classList.remove("cursor-not-allowed")
+//             readyText.classList.remove("hidden")
+//         }else{
+//             throw new Error("failed to send")
             
-        }
+//         }
 
-    } catch (error) {
-        console.error("error", error);
-        alert("error")
-        textarea.disabled = false;
-        generatebutton.disabled = false;
-        generatebutton.textContent = "Generate Video";
-        generatebutton.classList.remove("opacity-50", "cursor-not-allowed")
-    }
+//     } catch (error) {
+//         console.error("error", error);
+//         alert("error")
+//         textarea.disabled = false;
+//         generatebutton.disabled = false;
+//         generatebutton.textContent = "Generate Video";
+//         generatebutton.classList.remove("opacity-50", "cursor-not-allowed")
+//     }
 
 
-})
+// })
 
 //THIS IS FOR GENERATING IMAGE
-document.getElementById("subjectImageForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    formdata = new FormData(event.target);
-    console.log(formdata.entries());
-    for (let [key, value] of formdata.entries()) {
+// document.getElementById("subjectImageForm").addEventListener("submit", async (event) => {
+//     event.preventDefault();
+//     formdata = new FormData(event.target);
+//     console.log(formdata.entries());
+//     for (let [key, value] of formdata.entries()) {
         
-        console.log(`${key}: ${value}`);
-        title = value;
-    }
-    textareaImage.disabled = true
-    generatebuttonTrigger.disabled = true
-    generatebuttonTrigger.textContent = "Generating Image please wait..."
-    generatebuttonTrigger.classList.add("opacity-50", "cursor-not-allowed")
-    videoTrigger.disabled = true
-    videoTrigger.classList.add("cursor-not-allowed")
-    imageTrigger.disabled = true
-    imageTrigger.classList.add("cursor-not-allowed")
+//         console.log(`${key}: ${value}`);
+//         title = value;
+//     }
+//     textareaImage.disabled = true
+//     generatebuttonTrigger.disabled = true
+//     generatebuttonTrigger.textContent = "Generating Image please wait..."
+//     generatebuttonTrigger.classList.add("opacity-50", "cursor-not-allowed")
+//     videoTrigger.disabled = true
+//     videoTrigger.classList.add("cursor-not-allowed")
+//     imageTrigger.disabled = true
+//     imageTrigger.classList.add("cursor-not-allowed")
 
-    try{
-        const response = await fetch("http://87.106.135.198:5151/generateImage", {
-            // 87.106.135.198:5151
-            method: "POST",
-            body: formdata
-        })
+//     try{
+//         const response = await fetch("http://127.0.0.1:5000/test", {
+//             // 87.106.135.198:5151
+//             method: "POST",
+//             body: formdata
+//         })
 
-        if(response.ok){
-            console.log(response)
-            console.log("data sent");
-            generatebuttonTrigger.style.display = "none"
-            restartbutton.style.display = "block"
-            viewButton.disabled = false
-            viewButton.classList.remove("cursor-not-allowed")
-            downloadImageButton.disabled = false
-            downloadImageButton.classList.remove("cursor-not-allowed")
-            readyImageText.classList.remove("hidden")
+//         if(response.ok){
+//             console.log(response)
+//             console.log("data sent");
+//             generatebuttonTrigger.style.display = "none"
+//             restartbutton.style.display = "block"
+//             viewButton.disabled = false
+//             viewButton.classList.remove("cursor-not-allowed")
+//             downloadImageButton.disabled = false
+//             downloadImageButton.classList.remove("cursor-not-allowed")
+//             readyImageText.classList.remove("hidden")
 
            
            
-        }else{
-            throw new Error("failed to send")
+//         }else{
+//             throw new Error("failed to send")
             
-        }
+//         }
 
-    } catch (error) {
-        console.error("error", error);
-        alert("error")
-    }
+//     } catch (error) {
+//         console.error("error", error);
+//         alert("error")
+//     }
 
 
-})
+// })
 
 // THIS IS FOR STREAMING VIDEO
 function loadVideo(){
 
-    videovar.src= "http://87.106.135.198:5151/video";
+    videovar.src= "http://127.0.0.1:5000/video";
     videovar.load();
     videovar.play();
     videovar.style.display= "block";
@@ -139,7 +141,7 @@ function loadVideo(){
 
 // THIS IS FOR DOWNLOADING VIDEO
 async function downloadVideo(){
-    const response = await fetch("http://87.106.135.198:5151/downloadVideo", {
+    const response = await fetch("http://127.0.0.1:5000/downloadVideo", {
         method: "POST"
     })
 
@@ -167,37 +169,90 @@ function exitVideo(){
 }
 
 // THIS IS FOR VIEWING IMAGE
-function viewImage(){
-    fetch(`http://87.106.135.198:5151/streamImage`)
-    .then(response => response.blob())
-    .then(imageBlob => {
-        const imgUrl = URL.createObjectURL(imageBlob);
-        imagePreview.src = imgUrl
-        imagePreviewContainer.classList.remove("hidden")
-        imagePreviewContainer.classList.add("flex")
-    })
-    .catch(error => console.error("Error fetching image:", error));
-}
+// function viewImage(){
+//     fetch(`http://127.0.0.1:5000/streamImage`)
+//     .then(response => response.blob())
+//     .then(imageBlob => {
+//         const imgUrl = URL.createObjectURL(imageBlob);
+//         imagePreview.src = imgUrl
+//         imagePreviewContainer.classList.remove("hidden")
+//         imagePreviewContainer.classList.add("flex")
+//     })
+//     .catch(error => console.error("Error fetching image:", error));
+// }
 
 //THIS IS FOR DOWNLOADING IMAGE
-async function downloadImage(){
-    const response = await fetch("http://87.106.135.198:5151/test", {
-        method: "POST"
-    })
+// async function downloadImage(){
+//     const response = await fetch("http://127.0.0.1:5000/test", {
+//         method: "POST"
+//     })
 
-    if (!response.ok){
-        throw new Error (`Error : ${response.status} ${response.statusText}`);
+//     if (!response.ok){
+//         throw new Error (`Error : ${response.status} ${response.statusText}`);
+//     }
+
+//     const blob = await response.blob();
+//     const url = window.URL.createObjectURL(blob);
+//     const a = document.createElement("a");
+//     a.href=url
+//     a.download = `${title}.png`;
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+//     window.URL.revokeObjectURL(url);
+// }
+
+//THIS IS FOR UPLOADING VID
+function uploadVideo() {
+    
+    let fileInput = document.getElementById("videoUpload");
+    let logoInput = document.getElementById("logoUpload").files[0];
+    let files = fileInput.files; 
+ 
+    if (!logoInput || !fileInput) {
+        alert("Please upload the necessary files.");
+        return;
     }
 
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href=url
-    a.download = `${title}.png`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+    pleaseWait.classList.remove("hidden")
+    uploadButton.classList.add("hidden")
+    let formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append("videos", files[i]);  // Append multiple files
+    }
+    formData.append("image", logoInput);
+
+    fetch("http://127.0.0.1:5000/test", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+        return response.json();
+        
+    })
+    .then(data => {
+        pleaseWait.innerText ="Please Check the right Section"
+        pleaseWait.classList.remove("text-red-600")
+        pleaseWait.classList.add("text-green-600")
+        console.log(data);
+        pleaseWait.innerText = data.message;
+
+        let linksContainer = document.getElementById("downloadLinks");
+        linksContainer.innerHTML = "";  // Clear previous links
+
+        data.download_links.forEach(link => {
+            let li = document.createElement("li");
+            li.innerHTML = `<a href="${link}" download>Download Processed Video</a>`;
+            linksContainer.appendChild(li);
+        });
+    })
+    .catch(error => {
+        pleaseWait.innerText = "Upload Failed!";
+        console.error("Error:", error);
+    });
 }
 
 // THIS IS FOR CHOOSING IMAGE AND VIDEO

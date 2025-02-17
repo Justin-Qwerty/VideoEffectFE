@@ -15,14 +15,14 @@
     <div class="flex flex-row justify-evenly h-screen items-center">
         <div class="flex flex-col border-slate-800 border-2 p-24 rounded-xl blur-0 bg-transparent backdrop-blur-md">
             <h1 class="flex flex-row justify-center text-3xl my-5 font-semibold uppercase items-center text-[#222222] font-[orbitron]">TrendForge</h1>
-            <div class="flex flex-row items-center justify-center">
+            <!-- <div class="flex flex-row items-center justify-center">
                 <button onclick=generateVideo() id="videoTrigger" class="my-5 border-red-600 border-2 self-center cursor-not-allowed w-40 py-5 mx-3 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
                 " disabled>Generate Video</button>
                 <button onclick=generateImage() id="imageTrigger" class="my-5 border-2 self-center w-40 py-5 rounded-lg bg-slate-900 text-white text-md font-[orbitron] font-bold hover:bg-slate-800
                 ">Generate Image</button>
-            </div>
+            </div> -->
             <!-- THIS IS FOR THE FORM FOR VIDEO GENERATION -->
-            <form class="flex flex-row justify-center" id="subjectForm">
+            <!-- <form class="flex flex-row justify-center" id="subjectForm">
                 <div class="flex flex-col justify-center">
                     <label class="text-slate-600 text-xs mb-2 text-center">subject</label>
                     <textarea placeholder="Facts about the Philippines" id="subject" name="subject" class="w-96 h-32 resize self-center border-black border-2 text-slate-950 rounded-lg px-2 py-3" required></textarea>
@@ -30,9 +30,9 @@
                     <button class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600
                     " type="submit" id="generatebutton">Generate Video</button>
                 </div>
-            </form>
+            </form> -->
             <!-- THIS IS THE FORM FOR THE IMAGE GENERATION -->
-            <form class="flex-row justify-center hidden" id="subjectImageForm">
+            <!-- <form class="flex-row justify-center hidden" id="subjectImageForm">
                 <div class="flex flex-col justify-center">
                     <label class="text-slate-600 text-xs mb-2 text-center">subject</label>
                     <textarea placeholder="Facts about the Philippines" id="subjectImage" name="subject" class="w-96 h-32 resize self-center border-black border-2 text-slate-950 rounded-lg px-2 py-3" required></textarea>
@@ -40,12 +40,25 @@
                     <button class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600
                     " type="submit" id="generateImagebutton">Generate Image</button>
                 </div>
-            </form>
+            </form> -->
+            <div>
+                <div class="my-5">
+                    <label for="logoUpload" class="block text-lg font-semibold my-5">Upload Logo</label>
+                    <input type="file" id="logoUpload" accept="image/*" required>
+                </div>
+                <div>
+                <label for="videoUpload" class="block text-lg font-semibold my-5">Upload Video</label>
+                <input type="file" id="videoUpload" accept="video/*" multiple required>
+                </div>
+                <button onclick=uploadVideo() class="my-5 border-2 self-center w-56 py-5 rounded-lg bg-slate-700 text-white text-xl font-bold hover:bg-slate-600" id="uploadButton">Upload</button>
+                <h2 class="hidden text-red-600" id="pleaseWait">Please Wait for the video to process</h2>
+            </div>
             <a href="javascript:location.reload()" id="restartbutton" class="w-64 self-center hidden"><button class="my-5 border-2 self-center w-64 py-5 rounded-lg bg-slate-700 text-white text-lg font-bold  hover:bg-slate-600
                 ">Generate Another Content</button></a>
         </div>
+    
         <div class="justify-center items-center border-2 p-5 border-black rounded-lg">
-            <div class="" id="streamVideoContainer">
+            <!-- <div class="" id="streamVideoContainer">
                 <div class="flex-row items-center justify-between flex">
                 <h1 class="text-3xl font-semibold font-serif py-4 text-center">Stream Video</h1>
                 <button onclick=exitVideo() id="close-button" class="text-2xl font-serif font-semibold hidden">X</button>
@@ -68,7 +81,8 @@
                         <button id="viewButton" onclick=viewImage() class="border-2 p-4 hover:bg-slate-200 mr-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>View Image</button>
                         <button id="downloadImageButton" onclick=downloadImage() class="border-2 p-4 hover:bg-slate-200 ml-2 cursor-not-allowed rounded-lg my-4 font-semibold font-serif text-xl border-black" disabled>Download Image</button>
                     </div>
-            </div>
+            </div> -->
+            <ul id="downloadLinks"></ul>
         </div>
         
     </div>
