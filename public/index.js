@@ -203,16 +203,57 @@ function exitVideo(){
 // }
 
 //THIS IS FOR UPLOADING VID
+function startCountdown(durationInSeconds) {
+    const now = Date.now(); // Get current timestamp
+    const endTime = now + durationInSeconds * 1000; // Set end time
+
+    function updateCountdown() {
+        const currentTime = Date.now();
+        const remainingTime = Math.max(0, Math.floor((endTime - currentTime) / 1000));
+
+        let hours = Math.floor(remainingTime / 3600);
+        let minutes = Math.floor((remainingTime % 3600) / 60);
+        let seconds = remainingTime % 60;
+
+        document.getElementById('countdown').textContent = 
+            String(hours).padStart(2, '0') + ":" +
+            String(minutes).padStart(2, '0') + ":" +
+            String(seconds).padStart(2, '0');
+
+        if (remainingTime > 0) {
+            requestAnimationFrame(updateCountdown);
+        } else {
+            document.getElementById('countdown').textContent = "Time's up!";
+        }
+    }
+
+    updateCountdown(); // Start countdown
+}
+
 function uploadVideo() {
     
     let fileInput = document.getElementById("videoUpload");
+    let videoInput = document.getElementById("videoUpload").files[0];
     let logoInput = document.getElementById("logoUpload").files[0];
     let files = fileInput.files; 
  
-    if (!logoInput || !fileInput) {
+    if (!videoInput) {
         alert("Please upload the necessary files.");
         return;
     }
+
+    document.getElementById("videoUpload").addEventListener("change", function () {
+        const maxFiles = 10;  // Set max file limit
+        const files = this.files;
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (files.length > maxFiles) {
+            errorMsg.textContent = `You can only upload up to ${maxFiles} videos.`;
+            this.value = "";  // Reset file input
+        } else {
+            errorMsg.textContent = "";  // Clear error message
+        }
+    });
 
     pleaseWait.classList.remove("hidden")
     uploadButton.classList.add("hidden")
@@ -221,8 +262,13 @@ function uploadVideo() {
         formData.append("videos", files[i]);  // Append multiple files
     }
     formData.append("image", logoInput);
-
-    fetch("http://127.0.0.1:5000/test", {
+    if (files.length > 20){
+        startCountdown(60 + 20 * 60)
+    }else{
+        startCountdown(60 + files.length * 60)
+    }
+    fetch("http://87.106.135.198:5151/test", {
+        // http://87.106.135.198:5151
         method: "POST",
         body: formData
     })
@@ -234,6 +280,7 @@ function uploadVideo() {
         
     })
     .then(data => {
+        
         pleaseWait.innerText ="Please Check the right Section"
         pleaseWait.classList.remove("text-red-600")
         pleaseWait.classList.add("text-green-600")
@@ -248,6 +295,7 @@ function uploadVideo() {
             li.innerHTML = `<a href="${link}" download>Download Processed Video</a>`;
             linksContainer.appendChild(li);
         });
+        restartbutton.classList.remove("hidden")
     })
     .catch(error => {
         pleaseWait.innerText = "Upload Failed!";
